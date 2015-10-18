@@ -3,7 +3,6 @@ package microsoft.poi.test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,14 +16,13 @@ public class testReading {
 		
 		try {
 			
-			FileInputStream file = new FileInputStream(new File("/home/tony/Desktop/test.xls"));
-			
+			FileInputStream file = new FileInputStream(new File("/home/tony/Desktop/test.xlsx"));
+			System.out.println(file);
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			
 			Iterator<Row> rowIterator = sheet.iterator();
-			
 			while(rowIterator.hasNext()){
 				
 				Row row = rowIterator.next();
@@ -37,6 +35,7 @@ public class testReading {
 					
 					switch (cell.getCellType()) {
 					case Cell.CELL_TYPE_BOOLEAN:
+						System.out.println("Hi1");
 						System.out.println(cell.getBooleanCellValue());
 						break;
 					case Cell.CELL_TYPE_NUMERIC:
@@ -49,18 +48,16 @@ public class testReading {
 					System.out.println("");
 				}
 				file.close();
-				FileOutputStream out = new FileOutputStream(new File("/home/tony/Desktop/test2.xls"));
+				FileOutputStream out = new FileOutputStream(new File("/home/tony/Desktop/test2.xlsx"));
 				workbook.write(out);
 				out.close();
 			}
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
-		
-	
 	}
 	
 }
