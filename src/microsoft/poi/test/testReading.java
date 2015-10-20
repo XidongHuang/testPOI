@@ -29,11 +29,10 @@ public class testReading {
 
 		try {
 
-			
 			attributes = new ArrayList<>();
 			value = new ArrayList<>();
 			json = new ArrayList<>();
-			
+
 			FileInputStream file = new FileInputStream(new File("/home/tony/Desktop/test.xlsx"));
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			XSSFSheet sheet = workbook.getSheetAt(0);
@@ -84,29 +83,27 @@ public class testReading {
 
 					item = new JSONHashMap<String, String>();
 
-//					for (int i = 0; i < attributes.size(); i++) {
-//
-//						if (itemCounter >= attributes.size()) {
-//							item.put(attributes.get(i), value.get(i + itemCounter));
-//							if (i == attributes.size() - 1) {
-//								itemCounter += attributes.size();
-//							}
-//
-//						} else {
-//
-//							item.put(attributes.get(i), value.get(i));
-//							itemCounter++;
-//						}
-//					}
-					
-					
-					for(int i = 0; i< attributes.size();i++){
-						
+					// for (int i = 0; i < attributes.size(); i++) {
+					//
+					// if (itemCounter >= attributes.size()) {
+					// item.put(attributes.get(i), value.get(i + itemCounter));
+					// if (i == attributes.size() - 1) {
+					// itemCounter += attributes.size();
+					// }
+					//
+					// } else {
+					//
+					// item.put(attributes.get(i), value.get(i));
+					// itemCounter++;
+					// }
+					// }
+
+					for (int i = 0; i < attributes.size(); i++) {
+
 						item.put(attributes.get(i), value.get(i));
-						
-						
+
 					}
-					
+
 					json.add(item);
 					value.clear();
 				}
