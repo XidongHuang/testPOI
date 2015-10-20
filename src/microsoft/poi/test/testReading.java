@@ -84,24 +84,31 @@ public class testReading {
 
 					item = new JSONHashMap<String, String>();
 
-					for (int i = 0; i < attributes.size(); i++) {
-
-						if (itemCounter >= attributes.size()) {
-							item.put(attributes.get(i), value.get(i + itemCounter));
-							if (i == attributes.size() - 1) {
-								// System.out.println(item);
-								itemCounter += attributes.size();
-							}
-
-						} else {
-
-							item.put(attributes.get(i), value.get(i));
-							itemCounter++;
-						}
+//					for (int i = 0; i < attributes.size(); i++) {
+//
+//						if (itemCounter >= attributes.size()) {
+//							item.put(attributes.get(i), value.get(i + itemCounter));
+//							if (i == attributes.size() - 1) {
+//								itemCounter += attributes.size();
+//							}
+//
+//						} else {
+//
+//							item.put(attributes.get(i), value.get(i));
+//							itemCounter++;
+//						}
+//					}
+					
+					
+					for(int i = 0; i< attributes.size();i++){
+						
+						item.put(attributes.get(i), value.get(i));
+						
+						
 					}
-
+					
 					json.add(item);
-					System.out.println(json);
+					value.clear();
 				}
 
 				rowCount++;
