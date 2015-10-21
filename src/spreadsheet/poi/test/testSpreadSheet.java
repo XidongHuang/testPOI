@@ -12,8 +12,13 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
 import microsoft.poi.test.JSONHashMap;
+import spreadsheet.domain.ScoresDetail;
 
 public class testSpreadSheet {
 
@@ -63,7 +68,7 @@ public class testSpreadSheet {
 							break;
 
 						case Cell.CELL_TYPE_NUMERIC:
-							attributes.add(String.valueOf(cell.getNumericCellValue()));
+							attributes.add(String.valueOf((int)cell.getNumericCellValue()));
 							break;
 
 						case Cell.CELL_TYPE_STRING:
@@ -82,7 +87,7 @@ public class testSpreadSheet {
 							break;
 
 						case Cell.CELL_TYPE_NUMERIC:
-							values.add(String.valueOf(cell.getNumericCellValue()));
+							values.add(String.valueOf((int)cell.getNumericCellValue()));
 							break;
 
 						case Cell.CELL_TYPE_STRING:
@@ -115,7 +120,7 @@ public class testSpreadSheet {
 			System.out.println(attributes);
 			System.out.println(values);
 			System.out.println(json);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -126,8 +131,43 @@ public class testSpreadSheet {
 				e.printStackTrace();
 			}
 
-		}
+		}//finished try
 
+		String stringJson = json.toString();
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			
+			System.out.println(json.get(0));
+//			List<ScoresDetail> scores = (List<ScoresDetail>) mapper.readValue(stringJson, ScoresDetail.class);
+			String socreJson = json.get(0).toString();
+			String scoreJsons = json.toString();
+			ScoresDetail socre = mapper.readValue(socreJson, ScoresDetail.class);
+			socre.setCourseCode("2016FSpe");
+			System.out.println(socre);
+			
+			List<ScoresDetail> scoresDetails = mapper.readValue(scoreJsons, new TypeReference<List<ScoresDetail>>() {});
+			
+			System.out.println(scoresDetails);
+			
+//			Iterator iterator = scores.iterator();
+//			while(iterator.hasNext()){
+//				
+//				iterator.next();
+//				
+//			}
+			
+			
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
